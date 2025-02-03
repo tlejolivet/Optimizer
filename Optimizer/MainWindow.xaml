@@ -1,0 +1,32 @@
+﻿<Window x:Class="Optimizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Simulateur de clic" Height="400" Width="450">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+            <!-- Bouton pour définir le raccourci -->
+            <Button x:Name="ShortcutButton" Content="F1" Click="ShortcutButton_Click" HorizontalAlignment="Stretch" Margin="0 0 0 10"/>
+
+            <!-- Ligne pour la fenêtre 1 -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <CheckBox x:Name="Window1CheckBox" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window1TextBox" Text="Haorow - Sram - 3.0.42.30 - Release" Width="250"/>
+            </StackPanel>
+
+            <!-- Ligne pour la fenêtre 2 -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <CheckBox x:Name="Window2CheckBox" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window2TextBox" Text="Shhaia - Eniripsa - 3.0.42.30 - Release" Width="250"/>
+            </StackPanel>
+
+            <!-- Ligne pour la fenêtre 3 -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <CheckBox x:Name="Window3CheckBox" IsChecked="False" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window3TextBox" Text="Autre - Fenêtre - 3.0.42.30 - Release" Width="250"/>
+            </StackPanel>
+
+            <!-- Bouton pour activer/désactiver le script -->
+            <Button x:Name="ToggleScriptButton" Content="Activer le script" Click="ToggleScriptButton_Click" HorizontalAlignment="Stretch"/>
+        </StackPanel>
+    </Grid>
+</Window>
