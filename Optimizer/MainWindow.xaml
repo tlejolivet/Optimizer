@@ -10,19 +10,19 @@
             <!-- Ligne pour la fenêtre 1 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <CheckBox x:Name="Window1CheckBox" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window1TextBox" Text="Haorow - Sram - 3.0.42.30 - Release" Width="250"/>
+                <TextBox x:Name="Window1TextBox" Text="Nom - Classe - Version - Release - Release" Width="250"/>
             </StackPanel>
 
             <!-- Ligne pour la fenêtre 2 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <CheckBox x:Name="Window2CheckBox" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window2TextBox" Text="Shhaia - Eniripsa - 3.0.42.30 - Release" Width="250"/>
+                <TextBox x:Name="Window2TextBox" Text="Nom - Classe - Version - Release" Width="250"/>
             </StackPanel>
 
             <!-- Ligne pour la fenêtre 3 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <CheckBox x:Name="Window3CheckBox" IsChecked="False" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window3TextBox" Text="Autre - Fenêtre - 3.0.42.30 - Release" Width="250"/>
+                <TextBox x:Name="Window3TextBox" Text="Nom - Classe - Version - Release" Width="250"/>
             </StackPanel>
 
             <!-- Bouton pour activer/désactiver le script -->
