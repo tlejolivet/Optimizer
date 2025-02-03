@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace Mouse_Clone_UI
+namespace Optimizer
 {
     /// <summary>
     /// Interaction logic for App.xaml
