@@ -25,8 +25,8 @@ namespace WpfAppWithAutoHotkey
             InitializeComponent();
             this.Closed += MainWindow_Closed;
 
-            // Démarrer le serveur de pipe
-            StartPipeServer();
+            // Démarrer la surveillance du fichier temporaire
+            WatchHotkeyStatusFile();
 
             // Ajouter des gestionnaires d'événements pour les checkboxes
             Window1MouseCloneCheckBox.Checked += CheckBox_CheckedChanged;
@@ -52,36 +52,6 @@ namespace WpfAppWithAutoHotkey
             // Ajouter des gestionnaires d'événements pour les boutons de raccourci
             MouseCloneShortcutButton.LostFocus += ShortcutButton_LostFocus;
             HotkeyCloneShortcutButton.LostFocus += ShortcutButton_LostFocus;
-        }
-
-        private void StartPipeServer()
-        {
-            _pipeServer = new NamedPipeServerStream("OptimizerPipe", PipeDirection.In);
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    _pipeServer.WaitForConnection();
-                    using (StreamReader reader = new StreamReader(_pipeServer))
-                    {
-                        string message = reader.ReadLine();
-                        Dispatcher.Invoke(() =>
-                        {
-                            if (message == "HotkeyCloneEnabled")
-                            {
-                                HotkeyCloneStatusIndicator.Fill = Brushes.Green;
-                                _isHotkeyCloneActive = true;
-                            }
-                            else if (message == "HotkeyCloneDisabled")
-                            {
-                                HotkeyCloneStatusIndicator.Fill = Brushes.Gray;
-                                _isHotkeyCloneActive = false;
-                            }
-                        });
-                    }
-                    _pipeServer.Disconnect();
-                }
-            });
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -319,6 +289,10 @@ namespace WpfAppWithAutoHotkey
 
                 _ahkProcess = Process.Start(startInfo);
                 Console.WriteLine("Script activé !");
+
+                // Initialiser le voyant à "éteint"
+                HotkeyCloneStatusIndicator.Fill = Brushes.Gray;
+                _isHotkeyCloneActive = false;
             }
             catch (Exception ex)
             {
@@ -360,6 +334,9 @@ namespace WpfAppWithAutoHotkey
             // Convertir les raccourcis en noms AHK
             string ahkMouseCloneShortcut = TranslateShortcutToAhk(mouseCloneShortcut);
             string ahkHotkeyCloneShortcut = TranslateShortcutToAhk(hotkeyCloneShortcut);
+
+            // Chemin du fichier temporaire pour la communication
+            string tempFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hotkey_status.txt");
 
             // Générer le script AHK dynamiquement
             StringBuilder scriptBuilder = new StringBuilder();
@@ -415,15 +392,14 @@ namespace WpfAppWithAutoHotkey
             scriptBuilder.AppendLine("    HotkeyCloneEnabled := !HotkeyCloneEnabled");
             scriptBuilder.AppendLine("    if (HotkeyCloneEnabled)");
             scriptBuilder.AppendLine("    {");
-            scriptBuilder.AppendLine("        ; Envoyer un message à l'application pour allumer le voyant");
-            scriptBuilder.AppendLine("        Run, \"\"\"C:\\Windows\\System32\\cmd.exe\" /c echo HotkeyCloneEnabled > \\\\.\\pipe\\OptimizerPipe\",, Hide");
+            scriptBuilder.AppendLine($"        FileAppend, HotkeyCloneEnabled, {tempFilePath}");
             scriptBuilder.AppendLine("    }");
             scriptBuilder.AppendLine("    else");
             scriptBuilder.AppendLine("    {");
-            scriptBuilder.AppendLine("        ; Envoyer un message à l'application pour éteindre le voyant");
-            scriptBuilder.AppendLine("        Run, \"\"\"C:\\Windows\\System32\\cmd.exe\" /c echo HotkeyCloneDisabled > \\\\.\\pipe\\OptimizerPipe\",, Hide");
+            scriptBuilder.AppendLine($"        FileAppend, HotkeyCloneDisabled, {tempFilePath}");
             scriptBuilder.AppendLine("    }");
             scriptBuilder.AppendLine("}");
+            scriptBuilder.AppendLine();
 
             // Fonctionnalité Hotkey Clone
             scriptBuilder.AppendLine($"; Fonctionnalité Hotkey Clone");
@@ -470,6 +446,38 @@ namespace WpfAppWithAutoHotkey
             scriptBuilder.AppendLine("}");
 
             return scriptBuilder.ToString();
+        }
+
+        private void WatchHotkeyStatusFile()
+        {
+            string tempFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hotkey_status.txt");
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    if (File.Exists(tempFilePath))
+                    {
+                        string content = File.ReadAllText(tempFilePath);
+                        File.Delete(tempFilePath); // Supprimer le fichier après lecture
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            if (content.Contains("HotkeyCloneEnabled"))
+                            {
+                                HotkeyCloneStatusIndicator.Fill = Brushes.Green;
+                                _isHotkeyCloneActive = true;
+                            }
+                            else if (content.Contains("HotkeyCloneDisabled"))
+                            {
+                                HotkeyCloneStatusIndicator.Fill = Brushes.Gray;
+                                _isHotkeyCloneActive = false;
+                            }
+                        });
+                    }
+                    Thread.Sleep(100); // Vérifier le fichier toutes les 100 ms
+                }
+            });
         }
 
         private string TranslateShortcutToAhk(string shortcut)
