@@ -24,30 +24,30 @@
 
             <!-- Ligne pour la fenêtre 1 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <CheckBox x:Name="Window1MouseCloneCheckBox" Content="Mouse Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <CheckBox x:Name="Window1HotkeyCloneCheckBox" Content="Hotkey Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window1TextBox" Text="Haorow - Sram - 3.0.42.30 - Release" Width="250"/>
+                <CheckBox x:Name="Window1MouseCloneCheckBox" Content="MC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <CheckBox x:Name="Window1HotkeyCloneCheckBox" Content="HC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window1TextBox" Text="Perso1 - Classe - 3.0.44.35 - Release" Width="250"/>
             </StackPanel>
 
             <!-- Ligne pour la fenêtre 2 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <CheckBox x:Name="Window2MouseCloneCheckBox" Content="Mouse Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <CheckBox x:Name="Window2HotkeyCloneCheckBox" Content="Hotkey Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window2TextBox" Text="Shhaia - Eniripsa - 3.0.42.30 - Release" Width="250"/>
+                <CheckBox x:Name="Window2MouseCloneCheckBox" Content="MC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <CheckBox x:Name="Window2HotkeyCloneCheckBox" Content="HC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window2TextBox" Text="Perso2 - Classe - 3.0.44.35 - Release" Width="250"/>
             </StackPanel>
 
             <!-- Ligne pour la fenêtre 3 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <CheckBox x:Name="Window3MouseCloneCheckBox" Content="Mouse Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <CheckBox x:Name="Window3HotkeyCloneCheckBox" Content="Hotkey Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window3TextBox" Text="Autre - Fenêtre - 3.0.42.30 - Release" Width="250"/>
+                <CheckBox x:Name="Window3MouseCloneCheckBox" Content="MC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <CheckBox x:Name="Window3HotkeyCloneCheckBox" Content="HC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window3TextBox" Text="Perso3 - Classe - 3.0.44.35 - Release" Width="250"/>
             </StackPanel>
 
             <!-- Ligne pour la fenêtre 4 -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <CheckBox x:Name="Window4MouseCloneCheckBox" Content="Mouse Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <CheckBox x:Name="Window4HotkeyCloneCheckBox" Content="Hotkey Clone" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBox x:Name="Window4TextBox" Text="Quatrième - Fenêtre - 3.0.42.30 - Release" Width="250"/>
+                <CheckBox x:Name="Window4MouseCloneCheckBox" Content="MC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <CheckBox x:Name="Window4HotkeyCloneCheckBox" Content="HC" IsChecked="True" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBox x:Name="Window4TextBox" Text="Perso4 - Classe - 3.0.44.35 - Release" Width="250"/>
             </StackPanel>
 
             <!-- Bouton pour activer/désactiver le script -->
